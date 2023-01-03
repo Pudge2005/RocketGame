@@ -37,11 +37,6 @@ namespace DevourDev.Pools
                 item = _createItemMethod();
             }
 
-            if(item == null)
-            {
-                int x = 10;
-            }
-
             item.HandleRenting();
             return item;
         }

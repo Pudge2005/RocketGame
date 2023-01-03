@@ -12,5 +12,6 @@ namespace Game.Stats
 
 
         void ChangeStatValue(float rawDelta);
+        void SetStatValue(float value);
     }
 }

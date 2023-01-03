@@ -92,5 +92,10 @@ namespace Game.Stats
         {
             _internalStat.ChangeStatValue(rawDelta);
         }
+
+        void IStat.SetStatValue(float value)
+        {
+            _internalStat.SetStatValue(value);
+        }
     }
 }

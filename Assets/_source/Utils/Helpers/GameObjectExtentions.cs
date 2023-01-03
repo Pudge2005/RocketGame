@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace DevourDev.Unity.Utils
@@ -13,6 +14,18 @@ namespace DevourDev.Unity.Utils
             _componentsBuffer.Clear(); //for gc
             go.GetComponents(type, _componentsBuffer.GetInternalList());
             return _componentsBuffer.AsMemory();
+        }
+
+
+        public static Coroutine ExecuteDelayed(this MonoBehaviour monobeh, System.Action action, float delay)
+        {
+            return monobeh.StartCoroutine(DelayedExecutor(action, delay));
+        }
+
+        private static IEnumerator DelayedExecutor(System.Action action, float delay)
+        {
+            yield return new WaitForSecondsRealtime(delay);
+            action();
         }
     }
 

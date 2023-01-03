@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevourDev.Unity.Helpers
@@ -165,6 +167,15 @@ namespace DevourDev.Unity.Helpers
 
         public static ReadOnlyMemory<RaycastHit2D> MemCast(this Collider2D collider, Vector2 direction, ContactFilter2D filter, float distance)
         {
+            switch (collider)
+            {
+                case CircleCollider2D circleCollider2D:
+                    Vector2 fromPoint = circleCollider2D.bounds.center;
+                    return MemCircleCast(fromPoint, fromPoint + direction * distance, circleCollider2D.radius, filter);
+                default:
+                    break;
+            }
+
             int count = collider.Cast(direction, filter, _hitsBuffer, distance, false);
 
             if (count == 0)
@@ -181,6 +192,27 @@ namespace DevourDev.Unity.Helpers
 
             return default;
         }
+
+        public static ReadOnlyMemory<RaycastHit2D> Fetch(ReadOnlyMemory<RaycastHit2D> allHits, ICollection<Collider2D> exceptingColliders)
+        {
+            var span = allHits.Span;
+            var length = span.Length;
+            var fetchedBuffer = _hitsBuffer.AsMemory(length).Span;
+            int i = -1;
+
+            for (int j = 0; j < length; j++)
+            {
+                var hit = span[j];
+
+                if (exceptingColliders.Contains(hit.collider))
+                    continue;
+
+                fetchedBuffer[++i] = hit; //??????????? MB WONT WORK xdd
+            }
+
+            return _hitsMem.Slice(length, i + 1);
+        }
+
 
         public static bool TryFindClosest(ReadOnlyMemory<RaycastHit2D> hits, out RaycastHit2D closest)
         {
@@ -210,6 +242,9 @@ namespace DevourDev.Unity.Helpers
 
         public static bool TryFindClosest(ReadOnlyMemory<RaycastHit2D> hits, out RaycastHit2D closest, Collider2D exceptingCollider)
         {
+            if (exceptingCollider == null)
+                return TryFindClosest(hits, out closest);
+
             closest = default;
             var count = hits.Length;
 
@@ -224,6 +259,39 @@ namespace DevourDev.Unity.Helpers
                 var hit = span[i];
 
                 if (hit.collider == exceptingCollider)
+                    continue;
+
+                var dist = hit.distance;
+
+                if (dist < closestDist)
+                {
+                    closestDist = dist;
+                    closest = hit;
+                }
+            }
+
+            return closest;
+        }
+
+        public static bool TryFindClosest(ReadOnlyMemory<RaycastHit2D> hits, out RaycastHit2D closest, ICollection<Collider2D> exceptingColliders)
+        {
+            if (exceptingColliders == null || exceptingColliders.Count == 0)
+                return TryFindClosest(hits, out closest);
+
+            closest = default;
+            var count = hits.Length;
+
+            if (count == 0)
+                return false;
+
+            float closestDist = float.PositiveInfinity;
+            var span = hits.Span;
+
+            for (int i = 0; i < count; i++)
+            {
+                var hit = span[i];
+
+                if (exceptingColliders.Contains(hit.collider))
                     continue;
 
                 var dist = hit.distance;

@@ -2,29 +2,29 @@
 
 namespace Game
 {
-    [RequireComponent(typeof(Projectile))]
+    [RequireComponent(typeof(PoolableProjectile2D))]
     public class ProjectileView : MonoBehaviour
     {
         [SerializeField] private AudioClip _onHitSound;
         [SerializeField] private ParticleSystem _onHitParticles;
         [SerializeField] private TrailRenderer _trail;
 
-        private Projectile _projectile;
+        private PoolableProjectile2D _projectile;
 
 
         private void Awake()
         {
-            _projectile = GetComponent<Projectile>();
+            _projectile = GetComponent<PoolableProjectile2D>();
             _projectile.OnHit += HandleHit;
             _projectile.OnInit += HandleInit;
         }
 
-        private void HandleInit(Projectile projectile)
+        private void HandleInit(PoolableProjectile2D projectile)
         {
             _trail.Clear();
         }
 
-        private void HandleHit(Projectile arg1, Vector2 arg2)
+        private void HandleHit(PoolableProjectile2D arg1, Vector2 arg2)
         {
 
             if (_onHitSound != null)

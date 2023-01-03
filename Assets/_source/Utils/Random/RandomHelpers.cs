@@ -16,6 +16,10 @@ namespace DevourDev.Unity.Utils
             return p;
         }
 
+        public static float NextFloat(float min, float max, System.Random rnd)
+        {
+            return NextFloat(rnd) * (max - min) + min;
+        }
         public static float NextFloat(float min, float max, System.Random rnd, UnityEngine.AnimationCurve curve)
         {
             float mantissa = NextFloat(rnd, curve);

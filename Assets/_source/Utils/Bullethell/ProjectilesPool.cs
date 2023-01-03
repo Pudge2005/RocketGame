@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ProjectilesPool : PoolableComponentsPool<Projectile>
+    public class ProjectilesPool : PoolableComponentsPool<PoolableProjectile2D>
     {
-        [SerializeField] private Projectile _prefab;
+        [SerializeField] private PoolableProjectile2D _prefab;
 
-        protected override Projectile CreateItem()
+        protected override PoolableProjectile2D CreateItem()
         {
             return Instantiate(_prefab);
         }
 
-        protected override void DisposeItem(Projectile item)
+        protected override void DisposeItem(PoolableProjectile2D item)
         {
             if (item != null)
                 Destroy(item.gameObject);

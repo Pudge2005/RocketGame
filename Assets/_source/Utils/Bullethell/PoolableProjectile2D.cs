@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Projectile : PoolableComponent<Projectile>
+    public class PoolableProjectile2D : PoolableComponent<PoolableProjectile2D>
     {
         [SerializeField] private float _radius = 1f;
         [SerializeField] private HittablesComposite _hittablesComposite;
@@ -13,8 +13,8 @@ namespace Game
         private ContactFilter2D _contactFilter;
         private Collider2D _ignoringCollider;
 
-        public event System.Action<Projectile, Vector2> OnHit;
-        public event System.Action<Projectile> OnInit;
+        public event System.Action<PoolableProjectile2D, Vector2> OnHit;
+        public event System.Action<PoolableProjectile2D> OnInit;
 
 
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.SpaceShip
 {
@@ -11,11 +6,17 @@ namespace Game.SpaceShip
     {
         [Tooltip("Shoots per minute")]
         [SerializeField] private float _shootRate = 50f;
+        [SerializeField] private Vector2 _shootDirection = Vector2.down;
 
         [SerializeField] private ProjectilesPool _projectilesPool;
         [SerializeField] private Collider2D _ignoringCollider;
 
         private float _shootCD;
+
+
+        public float ShootRate { get => _shootRate; set => _shootRate = value; }
+        public Vector2 ShootDirection { get => _shootDirection; set => _shootDirection = value; }
+        public ProjectilesPool ProjectilesPool { get => _projectilesPool; set => _projectilesPool = value; }
 
 
         private void Awake()
@@ -42,16 +43,8 @@ namespace Game.SpaceShip
         private void Shoot()
         {
             var projectile = _projectilesPool.Rent();
-
-            ContactFilter2D filter = new()
-            {
-                layerMask = GameRules.CollidablesLayerMask,
-                useLayerMask = true,
-                useTriggers = false,
-            };
-
             projectile.transform.position = transform.position;
-            projectile.Init(Vector2.up * 10, filter, _ignoringCollider);
+            projectile.Init(Vector2.up * 10, GameRules.CollidablesContactFilter2D, _ignoringCollider);
         }
 
         private void ResetShootCD()
