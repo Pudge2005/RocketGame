@@ -5,7 +5,7 @@ namespace Game.Controller
 {
     public sealed class Controller2DInBoundsKeeper : Controller2DEndPositionProcessor
     {
-        [SerializeField] private SceneBounder _bounder;
+        [SerializeField] private SceneBounderBase _bounder;
         [SerializeField] private Collider2D _collider;
 
 

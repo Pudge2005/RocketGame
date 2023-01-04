@@ -5,11 +5,11 @@ namespace Game
 {
     public sealed class DestroyOnLeavingBounds : MonoBehaviour
     {
-        [SerializeField] private ProviderComponent<SceneBounder> _bounderProvider;
+        [SerializeField] private ProviderComponent<SceneBounderBase> _bounderProvider;
         [SerializeField] private float _minLifeTime = 5f;
         [SerializeField] private bool _resetOnEnterBounds = true;
 
-        private SceneBounder _bounder;
+        private SceneBounderBase _bounder;
         private float _minLifeTimeLeft;
 
 

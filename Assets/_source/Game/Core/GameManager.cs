@@ -17,7 +17,9 @@ namespace Game.Core
         [SerializeField] private TextMeshProUGUI _resultText;
         //==
 
-        [SerializeField] private SceneBounder _bounder;
+        [SerializeField] private SceneBounderBase _fullBounder;
+        [SerializeField] private SceneBounderBase _playerBounder;
+        [SerializeField] private SceneBounderBase _enemiesBounder;
 
         [SerializeField] private GameObject _playerShip;
         [SerializeField] private float _shipSpeed;
@@ -72,7 +74,10 @@ namespace Game.Core
 
         private void Awake()
         {
-            RuntimeAccessors.MainSceneBounder = _bounder;
+            RuntimeAccessors.MainSceneBounder = _fullBounder;
+            RuntimeAccessors.PlayerBounder = _playerBounder;
+            RuntimeAccessors.EnemiesBounder = _enemiesBounder;
+
             _playerShipHealth = _playerShip.GetComponent<HealthComponent>();
             _playerShipShield = _playerShip.GetComponent<ShieldDamageProcessor>();
 

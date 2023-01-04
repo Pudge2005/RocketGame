@@ -3,9 +3,9 @@ using Utils;
 
 namespace Game
 {
-    public sealed class SceneBounderFromRuntimeAccessorsProvider : ProviderComponent<SceneBounder>
+    public sealed class SceneBounderFromRuntimeAccessorsProvider : ProviderComponent<SceneBounderBase>
     {
-        public override SceneBounder GetItem()
+        public override SceneBounderBase GetItem()
         {
             return RuntimeAccessors.MainSceneBounder;
         }

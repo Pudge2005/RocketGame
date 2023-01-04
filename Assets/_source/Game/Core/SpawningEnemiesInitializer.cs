@@ -39,12 +39,12 @@ namespace Game.Core
             translator.OnReachedDestination += (x) =>
             {
                 var randomMover = x.gameObject.AddComponent<RandomMoverComponent>();
-                randomMover.Bounder = RuntimeAccessors.MainSceneBounder;
+                randomMover.Bounder = RuntimeAccessors.EnemiesBounder;
                 randomMover.SpeedRange = new Vector2(stats.BulletsSpeed / 10f, stats.BulletsSpeed / 2f);
                 Destroy(x);
             };
 
-            translator.InitInBoundsTranslator(RuntimeAccessors.MainSceneBounder, stats.BulletsSpeed);
+            translator.InitInBoundsTranslator(RuntimeAccessors.EnemiesBounder, stats.BulletsSpeed);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Game.Core
 {
     public sealed class InBoundsTranslator2D : EntityPositionTranslator
     {
-        private SceneBounder _bounder;
+        private SceneBounderBase _bounder;
         private float _speed;
         private Vector2 _speedVector;
         private Vector2 _destination;
@@ -15,7 +15,7 @@ namespace Game.Core
         public event System.Action<InBoundsTranslator2D> OnReachedDestination;
 
 
-        public void InitInBoundsTranslator(SceneBounder bounder, float speed)
+        public void InitInBoundsTranslator(SceneBounderBase bounder, float speed)
         {
             var min = bounder.Min;
             var max = bounder.Max;
@@ -26,7 +26,7 @@ namespace Game.Core
             InitInBoundsTranslator(bounder, speed, new Vector2(x, y));
         }
 
-        public void InitInBoundsTranslator(SceneBounder bounder, float speed, Vector2 destination)
+        public void InitInBoundsTranslator(SceneBounderBase bounder, float speed, Vector2 destination)
         {
             _bounder = bounder; 
             _destination = destination;

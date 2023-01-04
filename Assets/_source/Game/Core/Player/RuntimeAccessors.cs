@@ -28,7 +28,9 @@ namespace Game.Core
         }
 
 
-        public static SceneBounder MainSceneBounder { get; set; }
+        public static SceneBounderBase MainSceneBounder { get; set; }
+        public static SceneBounderBase PlayerBounder { get; set; }
+        public static SceneBounderBase EnemiesBounder { get; set; }
 
         public static PlayerData PlayerData => _playerData;
 

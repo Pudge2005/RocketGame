@@ -5,7 +5,7 @@ namespace DevourDev.Unity.Utils
 {
     public sealed class RandomMoverComponent : MonoBehaviour
     {
-        [SerializeField] private SceneBounder _bounder;
+        [SerializeField] private SceneBounderBase _bounder;
 
         [SerializeField] private Vector2 _speedRange = new(1f, 2f);
         [SerializeField] private Vector2 _stayingOnOnePosTimeRange = new(2f, 4f);
@@ -15,7 +15,7 @@ namespace DevourDev.Unity.Utils
 
         private float _regenerateDestPointCD;
 
-        public SceneBounder Bounder { get => _bounder; set => _bounder = value; }
+        public SceneBounderBase Bounder { get => _bounder; set => _bounder = value; }
         public Vector2 SpeedRange { get => _speedRange; set => _speedRange = value; }
         public Vector2 StayingOnOnePosTimeRange { get => _stayingOnOnePosTimeRange; set => _stayingOnOnePosTimeRange = value; }
 

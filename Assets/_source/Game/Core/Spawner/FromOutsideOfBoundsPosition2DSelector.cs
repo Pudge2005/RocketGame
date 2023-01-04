@@ -25,7 +25,7 @@ namespace Game.Core
         }
 
 
-        [SerializeField] private SceneBounder _bounder;
+        [SerializeField] private SceneBounderBase _bounder;
         [SerializeField] private Zone[] _zones;
         [SerializeField, Min(0f)] private float _distanceToBounds = 2f;
 
