@@ -23,11 +23,6 @@ namespace DevourDev.Unity.Utils
         public static float NextFloat(float min, float max, System.Random rnd, UnityEngine.AnimationCurve curve)
         {
             float mantissa = NextFloat(rnd, curve);
-            //range: from 15 to 20
-            //mantissa: 0.5f;
-            //expected result: (20 - 15) * 0.5 + 15
-            //                  5 * 0.5 + 15
-            //                  2.5 + 15 = 17.5
             return (max - min) * mantissa + min;
         }
 
