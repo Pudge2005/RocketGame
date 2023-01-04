@@ -8,6 +8,7 @@ namespace Game.Core
         public float Damage { get; set; }
         public float MinRadius { get; set; }
         public float MaxRadius { get; set; }
+        public float Health { get; set; }
 
         public Vector2 DirectionFrom { get; set; }
         public Vector2 DirectionTo { get; set; }

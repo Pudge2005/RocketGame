@@ -9,7 +9,7 @@ namespace Game.Stats
         [SerializeField] private ReceivingDamageProcessor[] _dmgProcessors;
 
         private Stat _internalStat;
-
+        private bool _inited;
 
         public float StatValue => _internalStat.StatValue;
 
@@ -43,8 +43,19 @@ namespace Game.Stats
         }
 
 
-        private void Awake()
+        public void InitHealth(float max)
         {
+            _healthMax = max;
+            Start();
+        }
+
+
+        private void Start()
+        {
+            if (_inited)
+                return;
+
+            _inited = true;
             _internalStat = new Stat(_healthMax, _healthMax);
             _internalStat.OnStatValueReachedMin += HandleHealthReachedMin;
         }

@@ -2,6 +2,7 @@
 
 namespace Game.Core
 {
+   
     public sealed class SpawningMeteorsInitializer : SpawningEntitiesInitializer<Meteor>
     {
         [SerializeField] private CurvesOverDistanceProcessor _curvesOverDistanceProcessor;

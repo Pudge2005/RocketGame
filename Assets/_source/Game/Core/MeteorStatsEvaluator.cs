@@ -14,6 +14,8 @@ namespace Game.Core
         [SerializeField] private AnimationCurve _meteorsMinRadiusOverDistance;
         [SerializeField] private AnimationCurve _meteorsMaxRadiusOverDistance;
 
+        [SerializeField] private AnimationCurve _meteorsHealthOverDistance;
+
         [SerializeField] private Vector2 _meteorsDirectionFrom = Vector2.down;
         [SerializeField] private Vector2 _meteorsDirectionTo = Vector2.down;
 
@@ -34,6 +36,7 @@ namespace Game.Core
             _stats.Damage = _processor.Evaluate(_meteorsDamageOverDistance);
             _stats.MinRadius = _processor.Evaluate(_meteorsMinRadiusOverDistance);
             _stats.MaxRadius = _processor.Evaluate(_meteorsMaxRadiusOverDistance);
+            _stats.Health = _processor.Evaluate(_meteorsHealthOverDistance);
         }
 
 

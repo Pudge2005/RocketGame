@@ -15,6 +15,8 @@ namespace Game.Core
         [SerializeField] private AnimationCurve _coolDownOverDistance;
         [SerializeField] private AnimationCurve _countOverDistance;
 
+        [SerializeField] private float _lastCdOverDist;
+        [SerializeField] private float _lastCountOverDist;
 
         private float _cd;
         private int _aliveEntites;
@@ -28,7 +30,7 @@ namespace Game.Core
 
         private void ResetCD()
         {
-            _cd = _overDistanceProcessor.Evaluate(_coolDownOverDistance);
+          _lastCdOverDist =  _cd = _overDistanceProcessor.Evaluate(_coolDownOverDistance);
         }
 
         private void Update()
@@ -41,7 +43,9 @@ namespace Game.Core
             if (_dontSpawnInSafeZone && _gm.InSafeZone)
                 return;
 
-            if (_aliveEntites >= _overDistanceProcessor.Evaluate(_coolDownOverDistance))
+            _lastCountOverDist = _overDistanceProcessor.Evaluate(_countOverDistance);
+
+            if (_aliveEntites >= _lastCountOverDist)
                 return;
 
             ++_aliveEntites;

@@ -125,6 +125,14 @@ namespace Utils
             clampedY -= offsetY;
         }
 
+        public bool Contains2D(Vector2 point)
+        {
+            var min = Min;
+            var max = Max;
+
+            return point.x >= min.x && point.x <= max.x
+                && point.y >= min.y && point.y <= max.y;
+        }
         public bool Contains(Vector3 point)
         {
             var min = Min;

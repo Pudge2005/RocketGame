@@ -7,6 +7,7 @@ namespace Game.SpaceShip
         [Tooltip("Shoots per minute")]
         [SerializeField] private float _shootRate = 50f;
         [SerializeField] private Vector2 _shootDirection = Vector2.down;
+        [SerializeField] private float _bulletsSpeed = 10f;
 
         [SerializeField] private ProjectilesPool _projectilesPool;
         [SerializeField] private Collider2D _ignoringCollider;
@@ -16,6 +17,7 @@ namespace Game.SpaceShip
 
         public float ShootRate { get => _shootRate; set => _shootRate = value; }
         public Vector2 ShootDirection { get => _shootDirection; set => _shootDirection = value; }
+        public float BulletsSpeed { get => _bulletsSpeed; set => _bulletsSpeed = value; }
         public ProjectilesPool ProjectilesPool { get => _projectilesPool; set => _projectilesPool = value; }
 
 
@@ -44,7 +46,7 @@ namespace Game.SpaceShip
         {
             var projectile = _projectilesPool.Rent();
             projectile.transform.position = transform.position;
-            projectile.Init(Vector2.up * 10, GameRules.CollidablesContactFilter2D, _ignoringCollider);
+            projectile.Init(_shootDirection * _bulletsSpeed, GameRules.CollidablesContactFilter2D, _ignoringCollider);
         }
 
         private void ResetShootCD()

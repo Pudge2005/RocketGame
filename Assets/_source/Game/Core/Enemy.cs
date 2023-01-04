@@ -13,6 +13,9 @@ namespace Game.Core
         private EnemyStats _stats;
 
 
+        public Turrel Turrel => _turrel;
+
+
         public void InitEnemy(EnemyStats stats)
         {
             _stats = stats;

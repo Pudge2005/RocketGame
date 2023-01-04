@@ -17,6 +17,17 @@ namespace DevourDev.Unity.Helpers
         private float _extraTimeLeft;
 
 
+        private Camera Cam
+        {
+            get
+            {
+                if (_cam == null)
+                    _cam = Camera.main;
+
+                return _cam;
+            }
+        }
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -33,8 +44,7 @@ namespace DevourDev.Unity.Helpers
         {
             _forcedReleasable = GetComponent<ForcedReleasableComponent>();
 
-            if (_cam == null)
-                _cam = Camera.main;
+            
 
             ResetCheckCoolDown();
         }
@@ -72,7 +82,7 @@ namespace DevourDev.Unity.Helpers
 
         protected override bool CheckInternal()
         {
-            var viewPortPos = _cam.WorldToViewportPoint(transform.position);
+            var viewPortPos = Cam.WorldToViewportPoint(transform.position);
             return (viewPortPos.x >= 0 && viewPortPos.x <= 1 && viewPortPos.y >= 0 && viewPortPos.y <= 1);
         }
 

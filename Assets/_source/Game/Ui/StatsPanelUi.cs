@@ -1,18 +1,16 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Ui
 {
 
-    public class StatsPanelUi : MonoBehaviour
+    public sealed class StatsPanelUi : MonoBehaviour
     {
         [SerializeField] private StatSlotUi _slotPrefab;
         [SerializeField] private Transform _slotsParent;
 
         private readonly List<StatSlotUi> _slots = new();
-        
+
 
         public StatSlotUi BuildSlot()
         {

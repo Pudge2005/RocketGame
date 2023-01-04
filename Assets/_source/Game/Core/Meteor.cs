@@ -7,6 +7,9 @@ namespace Game.Core
     [RequireComponent(typeof(Projectile2D), typeof(CircleCollider2D))]
     public sealed class Meteor : Hittable<HealthComponent>
     {
+        [SerializeField] private HealthComponent _health;
+
+
         public MeteorStats Stats { get; private set; }
 
 
@@ -20,8 +23,16 @@ namespace Game.Core
             Vector2 velocity = Vector2.Lerp(stats.DirectionFrom, stats.DirectionTo, UnityEngine.Random.value);
             velocity = velocity.normalized * stats.Speed;
 
+            if(_health != null)
+            {
+                _health.InitHealth(stats.Health);
+            }
+
+
             projectile.InitProjectile2D(HandleHits, circleCollider, velocity,
-                GameRules.CollidablesContactFilter2D, true);
+                GameRules.CollidablesContactFilter2D, true, circleCollider);
+
+
         }
 
         private void HandleHits(ReadOnlyMemory<RaycastHit2D> hits)

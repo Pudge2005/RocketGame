@@ -21,6 +21,7 @@ namespace Game
 
         private void ResetTtlLeft()
         {
+            Debug.Log($"{name} ttl reseted");
             _minLifeTimeLeft = _minLifeTime;
         }
 
@@ -32,7 +33,7 @@ namespace Game
                     return;
             }
 
-            if (!_bounder.Contains(transform.position))
+            if (!_bounder.Contains2D(transform.position))
                 Destroy(gameObject);
 
             if (_resetOnEnterBounds)

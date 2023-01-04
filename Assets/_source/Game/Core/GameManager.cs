@@ -72,6 +72,7 @@ namespace Game.Core
 
         private void Awake()
         {
+            RuntimeAccessors.MainSceneBounder = _bounder;
             _playerShipHealth = _playerShip.GetComponent<HealthComponent>();
             _playerShipShield = _playerShip.GetComponent<ShieldDamageProcessor>();
 

@@ -4,7 +4,7 @@ using Utils;
 
 namespace Game.Core
 {
-    public sealed class FromOutsideOfBoundsPosition2DSelector : SpawnPositionSelector
+    public sealed class FromOutsideOfBoundsPosition2DSelector : ProviderComponent<Vector3>
     {
         private enum Sides
         {
@@ -37,7 +37,7 @@ namespace Game.Core
             _rnd = new System.Random(UnityEngine.Random.Range(0, int.MaxValue));
         }
 
-        public override Vector3 GetSpawnPosition()
+        public override Vector3 GetItem()
         {
             Zone zone = _zones[UnityEngine.Random.Range(0, _zones.Length)];
             Vector3 spawnPos = Vector3.zero;

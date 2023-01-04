@@ -15,6 +15,7 @@ namespace DevourDev.Unity.Utils
 
         private float _regenerateDestPointCD;
 
+        public SceneBounder Bounder { get => _bounder; set => _bounder = value; }
         public Vector2 SpeedRange { get => _speedRange; set => _speedRange = value; }
         public Vector2 StayingOnOnePosTimeRange { get => _stayingOnOnePosTimeRange; set => _stayingOnOnePosTimeRange = value; }
 

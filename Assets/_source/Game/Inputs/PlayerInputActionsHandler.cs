@@ -1,5 +1,4 @@
-﻿using System;
-using Game.Controller;
+﻿using Game.Controller;
 using UnityEngine;
 
 namespace Game.Inputs
@@ -8,6 +7,8 @@ namespace Game.Inputs
     {
         [SerializeField] private Controller2D _shipController;
         [SerializeField] private bool _forcedDestinationPositionRecheck = true;
+
+        [SerializeField] private float _shipSpeedDEBUG = 3f;
 
         private Camera _cam;
         private PlayerControls _controls;
@@ -86,7 +87,7 @@ namespace Game.Inputs
 
         private void MoveInDirection()
         {
-            _shipController.Velocity = _moveInDirection;
+            _shipController.Velocity = _moveInDirection.normalized * _shipSpeedDEBUG;
         }
 
         private void MoveToPoint()
@@ -98,7 +99,14 @@ namespace Game.Inputs
                 _destinationPoint = _cam.ScreenToWorldPoint(_controls.SpaceShip.SetDestinationPoint.ReadValue<Vector2>());
 
             Vector2 direction = _destinationPoint - (Vector2)_shipController.transform.position;
-            _shipController.Velocity = direction.normalized;
+            Vector2 velocity = direction.normalized * _shipSpeedDEBUG;
+
+            float deltaTime = Time.deltaTime;
+
+            if ((velocity * deltaTime).sqrMagnitude > direction.sqrMagnitude)
+                velocity = direction / deltaTime;
+
+            _shipController.Velocity = velocity;
         }
     }
 }

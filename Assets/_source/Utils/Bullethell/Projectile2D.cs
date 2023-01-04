@@ -61,22 +61,27 @@ namespace Game
 
             var hits = Physics2DHelpers.MemCast(_collider, _velocity, _filter, translation.magnitude);
 
-            if (_ignoringColliders != null)
-                hits = Physics2DHelpers.Fetch(hits, _ignoringColliders);
+            if (hits.Length > 0)
+            {
+                if (_ignoringColliders != null)
+                    hits = Physics2DHelpers.Fetch(hits, _ignoringColliders);
 
-            { //stack flushing
-                var span = hits.Span;
+                { //stack flushing
+                    var span = hits.Span;
 
-                foreach (var h in span)
-                {
-                    if (_hitEachTargetOnes)
-                        _ignoringColliders.Add(h.collider);
+                    foreach (var h in span)
+                    {
+                        if (_hitEachTargetOnes)
+                            _ignoringColliders.Add(h.collider);
 
-                    OnHit?.Invoke(this, h.point);
+                        OnHit?.Invoke(this, h.point);
+                    }
                 }
+
+                _hitsHandler(hits);
             }
 
-            _hitsHandler(hits);
+            transform.position += (Vector3)translation;
         }
     }
 }
